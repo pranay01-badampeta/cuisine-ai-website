@@ -93,11 +93,9 @@ export default function WelcomePage() {
     <main className="overflow-x-clip">
       {/* Hero */}
       <section className="relative">
-        <div className="pointer-events-none absolute -top-40 left-1/2 size-[46rem] -translate-x-1/2 rounded-full bg-brand-500/15 blur-[140px]" />
-        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgb(255_255_255/0.025)_1px,transparent_1px),linear-gradient(90deg,rgb(255_255_255/0.025)_1px,transparent_1px)] bg-[size:56px_56px] [mask-image:radial-gradient(ellipse_at_top,black,transparent_70%)]" />
         <div className="relative mx-auto grid max-w-6xl items-center gap-14 px-4 pt-16 pb-20 sm:px-6 lg:grid-cols-[1.05fr_1fr] lg:pt-24 lg:pb-28">
           <div className="animate-rise">
-            <span className="badge border border-brand-300/50 bg-brand-500/10 text-brand-700">
+            <span className="badge border border-line bg-canvas text-ink">
               <Sparkles className="size-3" /> For restaurants, bars and cafés
             </span>
             <h1 className="mt-6 font-display text-[2.6rem] leading-[1.04] font-semibold tracking-tight sm:text-6xl">
@@ -128,7 +126,7 @@ export default function WelcomePage() {
       </section>
 
       {/* Pains */}
-      <section className="border-y border-line bg-surface/40">
+      <section className="border-y border-line bg-canvas">
         <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
           <p className="text-sm font-semibold tracking-wider text-brand-400 uppercase">Sound familiar?</p>
           <h2 className="mt-3 max-w-2xl font-display text-3xl font-semibold tracking-tight sm:text-4xl">The work nobody opened a restaurant for.</h2>
@@ -205,7 +203,7 @@ export default function WelcomePage() {
       </section>
 
       {/* Less typing */}
-      <section className="border-t border-line bg-surface/40">
+      <section className="border-t border-line bg-canvas">
         <div className="mx-auto grid max-w-6xl items-start gap-12 px-4 py-24 sm:px-6 lg:grid-cols-[1.2fr_1fr]">
           <div>
             <p className="text-sm font-semibold tracking-wider text-brand-400 uppercase">Less typing, everywhere</p>
@@ -262,7 +260,7 @@ export default function WelcomePage() {
       </section>
 
       {/* Security */}
-      <section className="border-t border-line bg-surface/40">
+      <section className="border-t border-line bg-canvas">
         <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
             <div>
@@ -303,14 +301,13 @@ export default function WelcomePage() {
 
       {/* Final call to action */}
       <section className="px-4 pb-24 sm:px-6">
-        <div className="relative mx-auto max-w-6xl overflow-hidden rounded-3xl border border-brand-300/40 bg-gradient-to-br from-brand-200/60 via-surface to-surface px-6 py-16 text-center sm:px-12">
-          <div className="pointer-events-none absolute -top-24 left-1/2 size-[30rem] -translate-x-1/2 rounded-full bg-brand-500/20 blur-[120px]" />
+        <div className="relative mx-auto max-w-6xl overflow-hidden rounded-3xl bg-ink text-white px-6 py-16 text-center sm:px-12">
           <div className="relative">
             <h2 className="mx-auto max-w-2xl font-display text-3xl font-semibold tracking-tight sm:text-5xl">Give your team their evenings back.</h2>
-            <p className="mx-auto mt-4 max-w-xl text-muted">Create your restaurant, scan your first invoice and see your stock fill itself in.</p>
+            <p className="mx-auto mt-4 max-w-xl text-white/70">Create your restaurant, scan your first invoice and see your stock fill itself in.</p>
             <div className="mt-8 flex flex-wrap justify-center gap-3">
-              <a href={`${APP}/signup`} className="btn-primary px-6 text-base">Create your free account <ArrowRight className="size-4" /></a>
-              <a href={`${APP}/login`} className="btn-outline px-6 text-base">Log in</a>
+              <a href={`${APP}/signup`} className="btn bg-white px-6 text-base text-ink hover:bg-white/90">Create your free account <ArrowRight className="size-4" /></a>
+              <a href={`${APP}/login`} className="btn border border-white/30 px-6 text-base text-white hover:bg-white/10">Log in</a>
             </div>
           </div>
         </div>

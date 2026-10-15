@@ -12,7 +12,7 @@ const LINES = [
 
 export function PaperInvoice({ className = "" }: { className?: string }) {
   return (
-    <div className={`w-56 rounded-md bg-[#f6f3ec] p-4 font-mono text-[9px] leading-relaxed text-stone-700 shadow-[0_30px_60px_-20px_rgb(0_0_0/0.9)] ${className}`} aria-hidden>
+    <div className={`w-56 rounded-md bg-white p-4 font-mono text-[9px] leading-relaxed text-stone-700 border border-line shadow-sm ${className}`} aria-hidden>
       <p className="text-[11px] font-bold tracking-wide text-stone-900">CAVE SAINT-PAUL</p>
       <p>12 rue des Vignes, Paris 4e</p>
       <div className="my-2 flex justify-between border-y border-stone-300 py-1">
@@ -43,7 +43,7 @@ export function InvoiceReviewMockup({ className = "" }: { className?: string }) 
       </div>
       <ul className="divide-y divide-line">
         {LINES.map((l) => (
-          <li key={l.label} className={`flex items-center gap-3 px-4 py-2.5 ${l.check ? "bg-saffron-500/[0.06]" : ""}`}>
+          <li key={l.label} className={`flex items-center gap-3 px-4 py-2.5 ${l.check ? "bg-saffron-100" : ""}`}>
             <div className="min-w-0 flex-1">
               <p className="truncate text-[13px] font-medium">{l.label}</p>
               <p className="truncate text-[11px] text-muted">
@@ -78,7 +78,7 @@ export function FlowSteps() {
     <ol className="grid gap-3">
       {steps.map((s, i) => (
         <li key={s.title} className="card relative flex gap-4 p-5">
-          <span className="absolute top-3 right-4 font-display text-4xl text-white/10">{i + 1}</span>
+          <span className="absolute top-3 right-4 font-display text-4xl text-ink/10">{i + 1}</span>
           <span className="icon-chip bg-brand-500/15 text-brand-400"><s.icon className="size-5" /></span>
           <div className="pr-8">
             <p className="font-semibold">{s.title}</p>

@@ -6,61 +6,60 @@ html {
 }
 
 :root {
-  --font-jakarta: "Plus Jakarta Sans";
-  --font-fraunces: "Fraunces";
+  --font-inter: "Inter";
 }
 
 /*
- * Cuisine.AI – dark theme.
- * Colour scales are built for a dark background: low numbers (50–200) are dark tints used
- * as backgrounds, 400–600 are the vivid accents, high numbers (700–900) are light shades for
- * text on those tints. That keeps classes like "bg-brand-50 text-brand-700" readable.
+ * Cuisine.AI – plain black-on-white theme.
+ * Everything is black, white and greys; colour is kept only for warnings (amber) and problems (red),
+ * so they still stand out. Scales go from light (50–300, backgrounds and borders) to dark
+ * (400–900, accents and text), so classes like "bg-brand-50 text-brand-700" stay readable.
  */
 @theme {
-  --color-night: #060a08;
-  --color-surface: #0d1311;
-  --color-canvas: #141c18;
-  --color-ink: #edf4f0;
-  --color-muted: #8a9a92;
-  --color-line: #1e2a25;
+  --color-night: #ffffff;
+  --color-surface: #ffffff;
+  --color-canvas: #f6f6f6;
+  --color-ink: #0a0a0a;
+  --color-muted: #6b6b6b;
+  --color-line: #e4e4e4;
 
-  --color-brand-50: #0a2018;
-  --color-brand-100: #0e2c21;
-  --color-brand-200: #14402f;
-  --color-brand-300: #1c6145;
-  --color-brand-400: #34d399;
-  --color-brand-500: #10b981;
-  --color-brand-600: #059669;
-  --color-brand-700: #6ee7b7;
-  --color-brand-800: #a7f3d0;
-  --color-brand-900: #d1fae5;
+  --color-brand-50: #f6f6f6;
+  --color-brand-100: #efefef;
+  --color-brand-200: #e4e4e4;
+  --color-brand-300: #cfcfcf;
+  --color-brand-400: #1a1a1a;
+  --color-brand-500: #0a0a0a;
+  --color-brand-600: #000000;
+  --color-brand-700: #1a1a1a;
+  --color-brand-800: #0a0a0a;
+  --color-brand-900: #000000;
 
-  --color-saffron-100: #2a2010;
-  --color-saffron-400: #f7c04a;
-  --color-saffron-500: #f5a524;
+  --color-saffron-100: #fdf3dc;
+  --color-saffron-400: #b45309;
+  --color-saffron-500: #d97706;
 
-  --color-red-50: #2a1012;
-  --color-red-100: #3a1418;
-  --color-red-200: #5c1f25;
-  --color-red-300: #7f2a31;
-  --color-red-400: #f87171;
-  --color-red-600: #e5484d;
-  --color-red-700: #fca5a5;
+  --color-red-50: #fdf1f1;
+  --color-red-100: #fbe4e4;
+  --color-red-200: #f5c6c6;
+  --color-red-300: #eda3a3;
+  --color-red-400: #d02c2c;
+  --color-red-600: #c62828;
+  --color-red-700: #a51d1d;
 
-  --color-amber-200: #4a3a14;
-  --color-amber-300: #6b5318;
-  --color-amber-700: #fbbf24;
-  --color-amber-800: #fcd34d;
-  --color-amber-900: #fde68a;
+  --color-amber-200: #f8e2a8;
+  --color-amber-300: #f0cc6e;
+  --color-amber-700: #9a5b05;
+  --color-amber-800: #7c4a06;
+  --color-amber-900: #5f3905;
 
-  --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-display: var(--font-sans);
 
-  --animate-rise: rise 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  --animate-rise: rise 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) both;
   @keyframes rise {
     from {
       opacity: 0;
-      transform: translateY(8px);
+      transform: translateY(6px);
     }
     to {
       opacity: 1;
@@ -70,7 +69,7 @@ html {
 }
 
 :root {
-  color-scheme: dark;
+  color-scheme: light;
 }
 
 html {
@@ -79,28 +78,18 @@ html {
 
 body {
   color: var(--color-ink);
-  background:
-    radial-gradient(60rem 40rem at -10% -10%, rgb(16 185 129 / 0.13), transparent 60%),
-    radial-gradient(50rem 35rem at 110% 110%, rgb(245 165 36 / 0.08), transparent 60%),
-    var(--color-night);
-  background-attachment: fixed;
+  background: var(--color-night);
 }
 
 ::selection {
-  background: rgb(16 185 129 / 0.35);
+  background: rgb(0 0 0 / 0.12);
 }
 
-/* Thin, dark scrollbars */
 * {
   scrollbar-width: thin;
-  scrollbar-color: #26332d transparent;
+  scrollbar-color: #cfcfcf transparent;
 }
 
-/* Native pickers (date, select options) follow the dark theme */
-input[type="date"]::-webkit-calendar-picker-indicator,
-input[type="time"]::-webkit-calendar-picker-indicator {
-  filter: invert(0.8);
-}
 select option,
 select optgroup {
   background: var(--color-surface);
@@ -108,25 +97,25 @@ select optgroup {
 }
 
 @utility card {
-  @apply rounded-2xl border border-line bg-surface/85 shadow-[inset_0_1px_0_rgb(255_255_255/0.04),0_10px_30px_-12px_rgb(0_0_0/0.6)] backdrop-blur;
+  @apply rounded-2xl border border-line bg-surface;
 }
 @utility card-hover {
-  @apply transition duration-200 hover:-translate-y-0.5 hover:border-brand-300 hover:shadow-[inset_0_1px_0_rgb(255_255_255/0.06),0_18px_40px_-16px_rgb(16_185_129/0.35)];
+  @apply transition duration-150 hover:border-ink/40;
 }
 @utility btn {
   @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-xl px-4 text-sm font-semibold transition duration-150 select-none disabled:cursor-not-allowed disabled:opacity-50;
 }
 @utility btn-primary {
-  @apply btn bg-gradient-to-b from-brand-500 to-brand-600 text-white shadow-[inset_0_1px_0_rgb(255_255_255/0.2),0_8px_24px_-10px_rgb(16_185_129/0.8)] hover:brightness-110 active:brightness-95;
+  @apply btn bg-ink text-white hover:bg-ink/85 active:bg-ink;
 }
 @utility btn-ai {
-  @apply btn bg-gradient-to-r from-brand-500 via-teal-500 to-cyan-500 text-white shadow-[inset_0_1px_0_rgb(255_255_255/0.25),0_10px_30px_-10px_rgb(20_184_166/0.8)] hover:brightness-110 active:brightness-95;
+  @apply btn bg-ink text-white hover:bg-ink/85 active:bg-ink;
 }
 @utility btn-outline {
-  @apply btn border border-white/10 bg-white/[0.03] text-ink hover:border-brand-400/50 hover:bg-white/[0.07];
+  @apply btn border border-line bg-white text-ink hover:border-ink/40 hover:bg-canvas;
 }
 @utility btn-ghost {
-  @apply btn text-muted hover:bg-white/5 hover:text-ink;
+  @apply btn text-muted hover:bg-canvas hover:text-ink;
 }
 @utility btn-danger {
   @apply btn border border-red-300/60 bg-red-50 text-red-700 hover:bg-red-100;
@@ -138,7 +127,7 @@ select optgroup {
   @apply mb-1.5 block text-sm font-semibold text-ink/90;
 }
 @utility input {
-  @apply block min-h-11 w-full rounded-xl border border-line bg-canvas px-3.5 text-[15px] text-ink outline-none transition placeholder:text-muted/60 focus:border-brand-400/70 focus:bg-[#18221d] focus:ring-4 focus:ring-brand-500/15;
+  @apply block min-h-11 w-full rounded-xl border border-line bg-white px-3.5 text-[15px] text-ink outline-none transition placeholder:text-muted/70 focus:border-ink focus:ring-4 focus:ring-ink/10;
 }
 @utility badge {
   @apply inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-semibold whitespace-nowrap;
@@ -148,11 +137,10 @@ select optgroup {
 }
 @utility font-display {
   font-family: var(--font-display);
-  font-optical-sizing: auto;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.02em;
 }
 @utility text-gradient {
-  @apply bg-gradient-to-r from-brand-400 via-teal-300 to-saffron-400 bg-clip-text text-transparent;
+  @apply text-ink;
 }
 @utility data-table {
   @apply w-full text-left text-sm;
@@ -166,7 +154,7 @@ select optgroup {
     @apply border-b-0;
   }
   & tbody tr {
-    @apply transition-colors hover:bg-white/[0.02];
+    @apply transition-colors hover:bg-canvas;
   }
 }
 

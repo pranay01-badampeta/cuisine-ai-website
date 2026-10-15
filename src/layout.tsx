@@ -11,14 +11,14 @@ const LINKS = [
 export default function SiteLayout({ children }: { children: React.ReactNode }) {
   return (
     <div id="top">
-      <header className="sticky top-0 z-40 border-b border-line/70 bg-night/75 backdrop-blur-xl">
+      <header className="sticky top-0 z-40 border-b border-line/70 bg-white/90 backdrop-blur">
         <nav className="mx-auto flex h-16 max-w-6xl items-center gap-6 px-4 sm:px-6">
           <a href="#top" aria-label="Cuisine.AI home">
             <Logo />
           </a>
           <div className="hidden flex-1 items-center justify-center gap-1 md:flex">
             {LINKS.map((l) => (
-              <a key={l.href} href={l.href} className="rounded-lg px-3 py-2 text-sm font-medium text-muted transition hover:bg-white/5 hover:text-ink">
+              <a key={l.href} href={l.href} className="rounded-lg px-3 py-2 text-sm font-medium text-muted transition hover:bg-ink/5 hover:text-ink">
                 {l.label}
               </a>
             ))}
