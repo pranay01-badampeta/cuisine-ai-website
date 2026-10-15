@@ -1,0 +1,193 @@
+@import "tailwindcss";
+@source "../docs/index.html";
+
+html {
+  scroll-behavior: smooth;
+}
+
+:root {
+  --font-jakarta: "Plus Jakarta Sans";
+  --font-fraunces: "Fraunces";
+}
+
+/*
+ * Cuisine.AI – dark theme.
+ * Colour scales are built for a dark background: low numbers (50–200) are dark tints used
+ * as backgrounds, 400–600 are the vivid accents, high numbers (700–900) are light shades for
+ * text on those tints. That keeps classes like "bg-brand-50 text-brand-700" readable.
+ */
+@theme {
+  --color-night: #060a08;
+  --color-surface: #0d1311;
+  --color-canvas: #141c18;
+  --color-ink: #edf4f0;
+  --color-muted: #8a9a92;
+  --color-line: #1e2a25;
+
+  --color-brand-50: #0a2018;
+  --color-brand-100: #0e2c21;
+  --color-brand-200: #14402f;
+  --color-brand-300: #1c6145;
+  --color-brand-400: #34d399;
+  --color-brand-500: #10b981;
+  --color-brand-600: #059669;
+  --color-brand-700: #6ee7b7;
+  --color-brand-800: #a7f3d0;
+  --color-brand-900: #d1fae5;
+
+  --color-saffron-100: #2a2010;
+  --color-saffron-400: #f7c04a;
+  --color-saffron-500: #f5a524;
+
+  --color-red-50: #2a1012;
+  --color-red-100: #3a1418;
+  --color-red-200: #5c1f25;
+  --color-red-300: #7f2a31;
+  --color-red-400: #f87171;
+  --color-red-600: #e5484d;
+  --color-red-700: #fca5a5;
+
+  --color-amber-200: #4a3a14;
+  --color-amber-300: #6b5318;
+  --color-amber-700: #fbbf24;
+  --color-amber-800: #fcd34d;
+  --color-amber-900: #fde68a;
+
+  --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
+
+  --animate-rise: rise 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
+
+:root {
+  color-scheme: dark;
+}
+
+html {
+  background: var(--color-night);
+}
+
+body {
+  color: var(--color-ink);
+  background:
+    radial-gradient(60rem 40rem at -10% -10%, rgb(16 185 129 / 0.13), transparent 60%),
+    radial-gradient(50rem 35rem at 110% 110%, rgb(245 165 36 / 0.08), transparent 60%),
+    var(--color-night);
+  background-attachment: fixed;
+}
+
+::selection {
+  background: rgb(16 185 129 / 0.35);
+}
+
+/* Thin, dark scrollbars */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #26332d transparent;
+}
+
+/* Native pickers (date, select options) follow the dark theme */
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="time"]::-webkit-calendar-picker-indicator {
+  filter: invert(0.8);
+}
+select option,
+select optgroup {
+  background: var(--color-surface);
+  color: var(--color-ink);
+}
+
+@utility card {
+  @apply rounded-2xl border border-line bg-surface/85 shadow-[inset_0_1px_0_rgb(255_255_255/0.04),0_10px_30px_-12px_rgb(0_0_0/0.6)] backdrop-blur;
+}
+@utility card-hover {
+  @apply transition duration-200 hover:-translate-y-0.5 hover:border-brand-300 hover:shadow-[inset_0_1px_0_rgb(255_255_255/0.06),0_18px_40px_-16px_rgb(16_185_129/0.35)];
+}
+@utility btn {
+  @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-xl px-4 text-sm font-semibold transition duration-150 select-none disabled:cursor-not-allowed disabled:opacity-50;
+}
+@utility btn-primary {
+  @apply btn bg-gradient-to-b from-brand-500 to-brand-600 text-white shadow-[inset_0_1px_0_rgb(255_255_255/0.2),0_8px_24px_-10px_rgb(16_185_129/0.8)] hover:brightness-110 active:brightness-95;
+}
+@utility btn-ai {
+  @apply btn bg-gradient-to-r from-brand-500 via-teal-500 to-cyan-500 text-white shadow-[inset_0_1px_0_rgb(255_255_255/0.25),0_10px_30px_-10px_rgb(20_184_166/0.8)] hover:brightness-110 active:brightness-95;
+}
+@utility btn-outline {
+  @apply btn border border-white/10 bg-white/[0.03] text-ink hover:border-brand-400/50 hover:bg-white/[0.07];
+}
+@utility btn-ghost {
+  @apply btn text-muted hover:bg-white/5 hover:text-ink;
+}
+@utility btn-danger {
+  @apply btn border border-red-300/60 bg-red-50 text-red-700 hover:bg-red-100;
+}
+@utility btn-sm {
+  @apply min-h-9 rounded-lg px-3 text-xs;
+}
+@utility field-label {
+  @apply mb-1.5 block text-sm font-semibold text-ink/90;
+}
+@utility input {
+  @apply block min-h-11 w-full rounded-xl border border-line bg-canvas px-3.5 text-[15px] text-ink outline-none transition placeholder:text-muted/60 focus:border-brand-400/70 focus:bg-[#18221d] focus:ring-4 focus:ring-brand-500/15;
+}
+@utility badge {
+  @apply inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-semibold whitespace-nowrap;
+}
+@utility icon-chip {
+  @apply grid size-10 shrink-0 place-items-center rounded-xl;
+}
+@utility font-display {
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+  letter-spacing: -0.01em;
+}
+@utility text-gradient {
+  @apply bg-gradient-to-r from-brand-400 via-teal-300 to-saffron-400 bg-clip-text text-transparent;
+}
+@utility data-table {
+  @apply w-full text-left text-sm;
+  & th {
+    @apply border-b border-line px-4 py-3 text-[11px] font-semibold tracking-wider whitespace-nowrap text-muted uppercase;
+  }
+  & td {
+    @apply border-b border-line/70 px-4 py-3 align-middle;
+  }
+  & tr:last-child td {
+    @apply border-b-0;
+  }
+  & tbody tr {
+    @apply transition-colors hover:bg-white/[0.02];
+  }
+}
+
+/* Printed reports and labels: plain black on white, whatever the screen theme. */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  html,
+  body {
+    background: #fff !important;
+  }
+  * {
+    color: #111 !important;
+    border-color: #ccc !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+    backdrop-filter: none !important;
+  }
+  .card,
+  [class*="bg-"] {
+    background: transparent !important;
+  }
+}
