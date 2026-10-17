@@ -1,5 +1,5 @@
 @import "tailwindcss";
-@source "../docs/index.html";
+@source "../docs";
 
 html {
   scroll-behavior: smooth;

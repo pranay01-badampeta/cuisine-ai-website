@@ -2,18 +2,19 @@ import { Logo } from "./Logo";
 import { APP } from "./config";
 
 const LINKS = [
-  { href: "#invoices", label: "AI invoices" },
-  { href: "#features", label: "Features" },
-  { href: "#how", label: "How it works" },
-  { href: "#faq", label: "FAQ" },
+  { href: "./#invoices", label: "AI invoices" },
+  { href: "./#features", label: "Features" },
+  { href: "./#how", label: "How it works" },
+  { href: "pricing.html", label: "Pricing" },
+  { href: "./#faq", label: "FAQ" },
 ];
 
 export default function SiteLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div id="top">
+    <div>
       <header className="sticky top-0 z-40 border-b border-line/70 bg-white/90 backdrop-blur">
         <nav className="mx-auto flex h-16 max-w-6xl items-center gap-6 px-4 sm:px-6">
-          <a href="#top" aria-label="Cuisine.AI home">
+          <a href="./" aria-label="Cuisine.AI home">
             <Logo />
           </a>
           <div className="hidden flex-1 items-center justify-center gap-1 md:flex">
