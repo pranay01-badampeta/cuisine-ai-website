@@ -21,7 +21,7 @@ const ABOUT = {
     },
   ],
   teamTitle: { en: "The team", fr: "L'équipe" },
-  team: { en: "Cuisine.AI is built by Pranay Badampeta, with xlucifer65.", fr: "Cuisine.AI est développé par Pranay Badampeta, avec xlucifer65." },
+  team: { en: "Cuisine.AI is built by Pranay Badampeta, with Rayyan Ahmed and Rithvik RS.", fr: "Cuisine.AI est développé par Pranay Badampeta, avec Rayyan Ahmed et Rithvik RS." },
   valuesTitle: { en: "Our values", fr: "Nos valeurs" },
   help: { en: "Need help getting started?", fr: "Besoin d'accompagnement ?" },
 };
