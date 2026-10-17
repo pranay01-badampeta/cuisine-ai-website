@@ -5,6 +5,7 @@
 import type { L } from "./i18n";
 
 export type Plan = {
+  id: "essential" | "professional" | "business"; // the same ids as in the app's billing page
   name: L;
   users: L;
   features: L[];
@@ -15,6 +16,7 @@ export type Plan = {
 
 export const PLANS: Plan[] = [
   {
+    id: "essential",
     name: { en: "Essential", fr: "Essentiel" },
     users: { en: "2 users", fr: "2 utilisateurs" },
     features: [
@@ -27,6 +29,7 @@ export const PLANS: Plan[] = [
     monthly: 90,
   },
   {
+    id: "professional",
     name: { en: "Professional", fr: "Professionnel" },
     users: { en: "10 users", fr: "10 utilisateurs" },
     features: [
@@ -40,6 +43,7 @@ export const PLANS: Plan[] = [
     monthly: 150,
   },
   {
+    id: "business",
     name: { en: "Business", fr: "Entreprise" },
     users: { en: "Unlimited users", fr: "Utilisateurs illimités" },
     features: [

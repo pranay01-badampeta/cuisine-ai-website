@@ -9,7 +9,8 @@ const T = {
   billed: { en: "billed", fr: "facturé" },
   year: { en: "/year", fr: "/an" },
   month: { en: "/month", fr: "/mois" },
-  cta: { en: "Start free trial", fr: "Essai gratuit" },
+  cta: { en: "Choose this plan", fr: "Choisir cette offre" },
+  orTrial: { en: "or start the 14-day free trial", fr: "ou commencer l'essai gratuit de 14 jours" },
   annual: { en: "Annual commitment: billed", fr: "Engagement annuel : facturé" },
   save: { en: "SAVE", fr: "ÉCONOMISEZ" },
   monthly: { en: "Monthly commitment: billed", fr: "Engagement mensuel : facturé" },
@@ -46,10 +47,11 @@ export default function PricingPage({ lang }: { lang: Lang }) {
                 <span className="text-sm text-muted">{T.perSite[lang]}</span>
               </p>
               <p className="mt-3 text-sm">{T.billed[lang]} {eur(p.annual * 12)} {T.year[lang]}</p>
-              <a href={`${APP}/signup`} className="btn-primary mt-4 w-full rounded-none">{T.cta[lang]}</a>
+              <a href={`${APP}/billing/start?plan=${p.id}&period=year`} className="btn-primary mt-4 w-full rounded-none">{T.cta[lang]}</a>
+              <a href={`${APP}/signup`} className="mt-2 text-xs text-muted underline underline-offset-2 hover:text-ink">{T.orTrial[lang]}</a>
               <div className="mt-5 space-y-1 text-left text-xs text-muted">
-                <p>{T.annual[lang]} {eur(p.annual * 12)} {T.year[lang]} - {T.save[lang]} {eur((p.monthly - p.annual) * 12)}</p>
-                <p>{T.monthly[lang]} {eur(p.monthly)} {T.month[lang]}</p>
+                <a href={`${APP}/billing/start?plan=${p.id}&period=year`} className="block hover:text-ink hover:underline">{T.annual[lang]} {eur(p.annual * 12)} {T.year[lang]} - {T.save[lang]} {eur((p.monthly - p.annual) * 12)}</a>
+                <a href={`${APP}/billing/start?plan=${p.id}&period=month`} className="block hover:text-ink hover:underline">{T.monthly[lang]} {eur(p.monthly)} {T.month[lang]}</a>
               </div>
             </div>
           ))}
