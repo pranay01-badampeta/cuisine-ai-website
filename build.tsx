@@ -11,6 +11,7 @@ import { renderToStaticMarkup } from "react-dom/server";
 import SiteLayout from "./src/layout";
 import WelcomePage from "./src/page";
 import PricingPage from "./src/pricing";
+import { COMPARE, PLANS } from "./src/plans";
 
 const PAGES: { file: string; title: string; description: string; page: ReactElement }[] = [
   {
@@ -56,6 +57,27 @@ ${renderToStaticMarkup(<SiteLayout>{p.page}</SiteLayout>)}
   fs.writeFileSync(`docs/${p.file}`, html);
   console.log(`Built docs/${p.file} (${(html.length / 1024).toFixed(0)} kB)`);
 }
+// The "download the comparison table" PDF, printed from a plain HTML table by headless Chrome.
+const CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
+const table = `<!doctype html><meta charset="utf-8"><style>
+  body { font-family: -apple-system, Helvetica, Arial, sans-serif; color: #0a0a0a; margin: 32px; }
+  h1 { font-size: 20px; margin: 0 0 4px } p { color: #6b6b6b; font-size: 12px; margin: 0 0 18px }
+  table { width: 100%; border-collapse: collapse; font-size: 12px }
+  th, td { border-bottom: 1px solid #e4e4e4; padding: 8px 10px; text-align: center }
+  th:first-child, td:first-child { text-align: left } th { background: #0a0a0a; color: #fff }
+</style><h1>Cuisine.AI – plan comparison</h1><p>Prices per site, excluding VAT.</p>
+<table><tr><th>Feature</th>${PLANS.map((p) => `<th>${p.name}</th>`).join("")}</tr>
+${COMPARE.map((r) => `<tr>${r.map((c) => `<td>${c}</td>`).join("")}</tr>`).join("\n")}</table>`;
+if (fs.existsSync(CHROME)) {
+  const tmp = `${process.cwd()}/.comparison.html`;
+  fs.writeFileSync(tmp, table);
+  execFileSync(CHROME, ["--headless", "--disable-gpu", "--no-pdf-header-footer", `--print-to-pdf=${process.cwd()}/docs/cuisine-ai-plan-comparison.pdf`, `file://${tmp}`], { stdio: "ignore" });
+  fs.rmSync(tmp);
+  console.log("Built docs/cuisine-ai-plan-comparison.pdf");
+} else {
+  console.warn("Google Chrome not found: the comparison PDF was not rebuilt.");
+}
+
 fs.copyFileSync("src/icon.svg", "docs/icon.svg");
 fs.writeFileSync("docs/.nojekyll", "");
 execFileSync("npx", ["@tailwindcss/cli", "-i", "src/styles.css", "-o", "docs/styles.css", "--minify"], { stdio: "inherit" });
