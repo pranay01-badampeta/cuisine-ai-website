@@ -179,3 +179,18 @@ select optgroup {
     background: transparent !important;
   }
 }
+
+/* Scrolling ribbon on the home page */
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+.marquee {
+  animation: marquee 40s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee {
+    animation: none;
+  }
+}
