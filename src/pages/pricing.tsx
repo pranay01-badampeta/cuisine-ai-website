@@ -63,7 +63,7 @@ export default function PricingPage({ lang }: { lang: Lang }) {
           </a>
         </p>
 
-        <div className="mt-10 grid gap-6 md:grid-cols-2">
+        <div className="mx-auto mt-10 grid max-w-xl gap-6">
           {OPTIONS.map((o) => (
             <div key={o.name.en} className="bg-white p-6 text-center">
               <h2 className="text-lg font-semibold">{o.name[lang]}</h2>

@@ -14,12 +14,16 @@ export type Plan = {
   badge?: L;
 };
 
+/** Food safety is part of every plan, not an extra. */
+const HACCP: L = { en: "Hygiene & HACCP included", fr: "Hygiène & HACCP inclus" };
+
 export const PLANS: Plan[] = [
   {
     id: "essential",
     name: { en: "Essential", fr: "Essentiel" },
     users: { en: "2 users", fr: "2 utilisateurs" },
     features: [
+      HACCP,
       { en: "Recipe costs – Inventories", fr: "Coûts des recettes – Inventaires" },
       { en: "Stock and supplier orders", fr: "Stock et commandes fournisseurs" },
       { en: "Supplier price history", fr: "Historique des prix fournisseurs" },
@@ -33,6 +37,7 @@ export const PLANS: Plan[] = [
     name: { en: "Professional", fr: "Professionnel" },
     users: { en: "10 users", fr: "10 utilisateurs" },
     features: [
+      HACCP,
       { en: "User rights", fr: "Droits utilisateurs" },
       { en: "Margin analysis and reporting", fr: "Analyse des marges et rapports" },
       { en: "Menu costs and allergens", fr: "Coûts du menu et allergènes" },
@@ -47,6 +52,7 @@ export const PLANS: Plan[] = [
     name: { en: "Business", fr: "Entreprise" },
     users: { en: "Unlimited users", fr: "Utilisateurs illimités" },
     features: [
+      HACCP,
       { en: "Advanced user rights and audit log", fr: "Droits avancés et journal d'audit" },
       { en: "AI smart ordering", fr: "Commande intelligente par IA" },
       { en: "AI shelf count from a photo", fr: "Comptage des étagères par photo" },
@@ -71,15 +77,6 @@ export const OPTIONS: { name: L; price: number; text: L; slug: string }[] = [
     },
     slug: "sensors",
   },
-  {
-    name: { en: "Cuisine.AI Hygiene & Traceability option", fr: "Option Cuisine.AI Hygiène & Traçabilité" },
-    price: 38,
-    text: {
-      en: "Cleaning plan, temperature readings, frying oil log, delivery checks, product traceability, use-by dates and task planning.",
-      fr: "Plan de nettoyage, relevés de température, suivi des huiles de friture, contrôles à réception, traçabilité, DLC et planning des tâches.",
-    },
-    slug: "hygiene",
-  },
 ];
 
 /** The full comparison, used for the downloadable PDF: [feature, Essential, Professional, Business]. */
@@ -90,6 +87,13 @@ export const COMPARE: [L, L, L, L][] = (() => {
   const row = (en: string, fr: string, a: L, b: L, c: L): [L, L, L, L] => [{ en, fr }, a, b, c];
   return [
     row("Users", "Utilisateurs", v("2"), v("10"), { en: "Unlimited", fr: "Illimités" }),
+    row("Temperature readings (voice, sensors)", "Relevés de température (voix, sondes)", yes, yes, yes),
+    row("Cleaning plan and checklists", "Plan de nettoyage et check-lists", yes, yes, yes),
+    row("Traceability and label photos", "Traçabilité et photos d'étiquettes", yes, yes, yes),
+    row("Frying oil log", "Suivi des huiles de friture", yes, yes, yes),
+    row("Delivery checks", "Contrôles à réception", yes, yes, yes),
+    row("Use-by dates and allergens", "DLC et allergènes", yes, yes, yes),
+    row("Inspection report (PDF)", "Rapport d'inspection (PDF)", yes, yes, yes),
     row("Invoice scans per month (AI)", "Scans de factures par mois (IA)", v("20"), v("50"), v("100")),
     row("Recipe costs", "Coûts des recettes", yes, yes, yes),
     row("Inventories", "Inventaires", yes, yes, yes),

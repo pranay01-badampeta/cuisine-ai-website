@@ -326,7 +326,7 @@ export const FEATURES: Feature[] = [
   },
   {
     slug: "hygiene",
-    group: "options",
+    group: "platform",
     menu: { en: "Hygiene", fr: "Hygiène" },
     title: { en: "Hygiene and HACCP", fr: "Hygiène et HACCP" },
     tagline: {
@@ -378,7 +378,7 @@ export const FEATURES: Feature[] = [
   },
   {
     slug: "allergens",
-    group: "options",
+    group: "platform",
     menu: { en: "Allergens and traceability", fr: "Allergènes et traçabilité" },
     title: { en: "Allergens and traceability", fr: "Allergènes et traçabilité" },
     tagline: {
