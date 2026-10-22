@@ -1,79 +1,96 @@
-import { APP } from "../config";
-import { asset, href, type Lang } from "../i18n";
-import { OPTIONS, PLANS } from "../plans";
+import { ArrowRight, Check } from "lucide-react";
+import { UI, href, type Lang } from "../i18n";
+import { COMPARE, OPTIONS, PLANS } from "../plans";
 
 const T = {
-  title: { en: "Plans adapted to your needs!", fr: "Des offres adaptées à vos besoins !" },
-  trial: { en: "14-day free trial.", fr: "Essai gratuit pendant 14 jours." },
-  perSite: { en: "/month/site", fr: "/mois/site" },
-  billed: { en: "billed", fr: "facturé" },
-  year: { en: "/year", fr: "/an" },
-  month: { en: "/month", fr: "/mois" },
-  cta: { en: "Choose this plan", fr: "Choisir cette offre" },
-  orTrial: { en: "or start the 14-day free trial", fr: "ou commencer l'essai gratuit de 14 jours" },
-  annual: { en: "Annual commitment: billed", fr: "Engagement annuel : facturé" },
-  save: { en: "SAVE", fr: "ÉCONOMISEZ" },
-  monthly: { en: "Monthly commitment: billed", fr: "Engagement mensuel : facturé" },
-  download: { en: "Download the full comparison table of the plans", fr: "Télécharger le tableau comparatif complet des forfaits" },
-  discover: { en: "Discover", fr: "Découvrir" },
+  title: { en: "Simple pricing.", fr: "Des prix simples." },
+  text: {
+    en: "One price per restaurant, per month. Food safety and HACCP are included in every plan.",
+    fr: "Un prix par restaurant et par mois. L'hygiène et le HACCP sont inclus dans chaque offre.",
+  },
+  perMonth: { en: "/ month", fr: "/ mois" },
+  yearly: { en: "billed yearly", fr: "facturé à l'année" },
+  orMonthly: { en: "or {n} € month to month", fr: "ou {n} € sans engagement annuel" },
+  vat: { en: "Prices per restaurant, excluding VAT.", fr: "Prix par restaurant, hors taxes." },
+  compare: { en: "Compare every feature", fr: "Comparer toutes les fonctionnalités" },
+  feature: { en: "Feature", fr: "Fonctionnalité" },
 };
-
-const eur = (n: number) => `${n.toLocaleString("fr-FR")} €`;
 
 export default function PricingPage({ lang }: { lang: Lang }) {
   return (
-    <main className="bg-canvas px-4 py-14 sm:px-6">
-      <div className="mx-auto max-w-6xl">
-        <div className="text-center">
-          <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">{T.title[lang]}</h1>
-          <p className="mt-2 text-muted">{T.trial[lang]}</p>
-        </div>
+    <main className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24">
+      <div className="text-center">
+        <h1 className="headline text-6xl sm:text-7xl">{T.title[lang]}</h1>
+        <p className="mx-auto mt-5 max-w-xl text-lg text-muted">{T.text[lang]}</p>
+      </div>
 
-        <div className="mt-10 grid gap-6 lg:grid-cols-3">
-          {PLANS.map((p) => (
-            <div key={p.name.en} className="relative flex flex-col overflow-hidden border-t-2 border-ink bg-white px-6 pt-8 pb-6 text-center">
-              {p.badge && (
-                <span className="absolute top-5 -right-12 w-44 rotate-45 bg-ink py-1 text-center text-xs font-semibold text-white">{p.badge[lang]}</span>
-              )}
-              <h2 className="border-b border-line pb-4 text-2xl tracking-wide uppercase">{p.name[lang]}</h2>
-              <p className="mt-4 font-medium">{p.users[lang]}</p>
-              <ul className="mt-4 flex-1 space-y-2.5 text-sm">
+      <div className="mt-14 grid gap-5 lg:grid-cols-3">
+        {PLANS.map((p) => {
+          const featured = Boolean(p.badge);
+          return (
+            <div key={p.id} className={`flex flex-col rounded-3xl border p-7 ${featured ? "border-ink bg-ink text-white" : "border-line bg-white"}`}>
+              <div className="flex items-center justify-between">
+                <h2 className="text-lg font-semibold">{p.name[lang]}</h2>
+                {p.badge && <span className="rounded-full bg-white px-3 py-1 text-xs font-semibold text-ink">{p.badge[lang]}</span>}
+              </div>
+              <p className={`mt-1 text-sm ${featured ? "text-white/60" : "text-muted"}`}>{p.users[lang]}</p>
+              <p className="mt-6">
+                <span className="headline text-6xl">{p.annual} €</span>
+                <span className={`text-sm ${featured ? "text-white/60" : "text-muted"}`}> {T.perMonth[lang]}</span>
+              </p>
+              <p className={`mt-1 text-xs ${featured ? "text-white/60" : "text-muted"}`}>
+                {T.yearly[lang]} · {T.orMonthly[lang].replace("{n}", String(p.monthly))}
+              </p>
+              <ul className="mt-6 flex-1 space-y-2.5 text-sm">
                 {p.features.map((f) => (
-                  <li key={f.en}>{f[lang]}</li>
+                  <li key={f.en} className="flex gap-2.5">
+                    <Check className={`mt-0.5 size-4 shrink-0 ${featured ? "text-white" : "text-ink"}`} /> {f[lang]}
+                  </li>
                 ))}
               </ul>
-              <p className="mt-8">
-                <span className="text-4xl font-semibold">{p.annual}€</span>
-                <span className="text-sm text-muted">{T.perSite[lang]}</span>
-              </p>
-              <p className="mt-3 text-sm">{T.billed[lang]} {eur(p.annual * 12)} {T.year[lang]}</p>
-              <a href={`${APP}/billing/start?plan=${p.id}&period=year`} className="btn-primary mt-4 w-full rounded-none">{T.cta[lang]}</a>
-              <a href={`${APP}/signup`} className="mt-2 text-xs text-muted underline underline-offset-2 hover:text-ink">{T.orTrial[lang]}</a>
-              <div className="mt-5 space-y-1 text-left text-xs text-muted">
-                <a href={`${APP}/billing/start?plan=${p.id}&period=year`} className="block hover:text-ink hover:underline">{T.annual[lang]} {eur(p.annual * 12)} {T.year[lang]} - {T.save[lang]} {eur((p.monthly - p.annual) * 12)}</a>
-                <a href={`${APP}/billing/start?plan=${p.id}&period=month`} className="block hover:text-ink hover:underline">{T.monthly[lang]} {eur(p.monthly)} {T.month[lang]}</a>
-              </div>
+              <a
+                href={href(lang, "contact")}
+                className={`btn mt-8 rounded-full ${featured ? "bg-white text-ink hover:bg-white/90" : "bg-ink text-white hover:bg-ink/85"}`}
+              >
+                {UI.demo[lang]} <ArrowRight className="size-4" />
+              </a>
             </div>
-          ))}
-        </div>
-
-        <p className="mt-10 text-center">
-          <a href={asset(`cuisine-ai-plan-comparison-${lang}.pdf`)} download className="text-sm font-semibold tracking-wide uppercase underline underline-offset-4">
-            {T.download[lang]}
-          </a>
-        </p>
-
-        <div className="mx-auto mt-10 grid max-w-xl gap-6">
-          {OPTIONS.map((o) => (
-            <div key={o.name.en} className="bg-white p-6 text-center">
-              <h2 className="text-lg font-semibold">{o.name[lang]}</h2>
-              <p className="mt-2 text-3xl font-semibold">{o.price}€<span className="text-sm font-normal text-muted">{T.month[lang]}</span></p>
-              <p className="mt-3 text-sm text-muted">{o.text[lang]}</p>
-              <a href={href(lang, o.slug)} className="mt-4 inline-block text-sm font-semibold underline underline-offset-4">{T.discover[lang]} →</a>
-            </div>
-          ))}
-        </div>
+          );
+        })}
       </div>
+      <p className="mt-6 text-center text-sm text-muted">
+        {T.vat[lang]}
+        {OPTIONS.map((o) => ` ${o.name[lang]}: +${o.price} € ${T.perMonth[lang]}.`)}
+      </p>
+
+      <details className="group mt-14 rounded-3xl border border-line [&_summary::-webkit-details-marker]:hidden">
+        <summary className="flex cursor-pointer list-none items-center justify-between px-6 py-5 font-semibold">
+          {T.compare[lang]}
+          <span className="grid size-8 place-items-center rounded-full border border-line text-muted transition group-open:rotate-45">+</span>
+        </summary>
+        <div className="overflow-x-auto px-6 pb-6">
+          <table className="w-full min-w-[34rem] text-sm">
+            <thead>
+              <tr className="border-b border-ink text-left">
+                <th className="py-3 pr-4 font-semibold">{T.feature[lang]}</th>
+                {PLANS.map((p) => (
+                  <th key={p.id} className="px-2 py-3 text-center font-semibold">{p.name[lang]}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {COMPARE.map(([name, ...cells]) => (
+                <tr key={name.en} className="border-b border-line">
+                  <td className="py-2.5 pr-4">{name[lang]}</td>
+                  {cells.map((c, i) => (
+                    <td key={i} className="px-2 py-2.5 text-center text-muted">{c[lang]}</td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </details>
     </main>
   );
 }

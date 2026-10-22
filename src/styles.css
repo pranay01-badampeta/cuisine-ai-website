@@ -54,6 +54,8 @@ html {
 
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --font-display: var(--font-sans);
+  /* Headlines: an elegant serif, black on white. */
+  --font-serif: "Instrument Serif", ui-serif, Georgia, serif;
 
   --animate-rise: rise 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) both;
   @keyframes rise {
@@ -193,4 +195,15 @@ select optgroup {
   .marquee {
     animation: none;
   }
+}
+
+/* Big serif headlines */
+@utility headline {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  letter-spacing: -0.015em;
+  line-height: 1.02;
+}
+@utility eyebrow {
+  @apply text-xs font-semibold tracking-[0.18em] text-muted uppercase;
 }
